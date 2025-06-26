@@ -1,6 +1,7 @@
 ---
 weight: 3
 bookFlatSection: true
+bookCollapseSection: true
 title: "第三章-数据库使用"
 bookToc: true
 ---
