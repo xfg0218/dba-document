@@ -6,6 +6,17 @@
  客户端驱动下载
  &lt;a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd">#&lt;/a>
 &lt;/h2>
+&lt;p>建议选择使用与与 PostgreSQL 与 Greenplum 兼容的驱动。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>
+ &lt;a href="https://jdbc.postgresql.org/">PostgreSQL 官方驱动&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>
+ &lt;a href="https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/datadirect-datadirect_jdbc.html#configuring-prepared-statement-execution">Greenplum 官方驱动&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
 &lt;h2 id="常见链接工具使用">
  常见链接工具使用
  &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e9%93%be%e6%8e%a5%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8">#&lt;/a>
@@ -14,14 +25,124 @@
  &lt;strong>DBeaver&lt;/strong>
  &lt;a class="anchor" href="#dbeaver">#&lt;/a>
 &lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://dbeaver.io/docs/wiki/Home/">DBeaver 中文文档&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="dbvisualizer">
  &lt;strong>DbVisualizer&lt;/strong>
  &lt;a class="anchor" href="#dbvisualizer">#&lt;/a>
 &lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.dbvis.com/download/">DbVisualizer 客户端连接软件&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="navicat">
  &lt;strong>Navicat&lt;/strong>
  &lt;a class="anchor" href="#navicat">#&lt;/a>
-&lt;/h3></description></item><item><title>编程语言连接数据库</title><link>http://localhost:1313/docs/chapter03/codeconnection/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/chapter03/codeconnection/</guid><description>&lt;h2 id="编程语言接入">
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="http://www.navicat.com.cn/download/navicat-for-postgresql">客户端管理工具navicat下载&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="tableplus">
+ &lt;strong>Tableplus&lt;/strong>
+ &lt;a class="anchor" href="#tableplus">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://docs.tableplus.com/">Tableplus&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="smartsql">
+ &lt;strong>SmartSQL&lt;/strong>
+ &lt;a class="anchor" href="#smartsql">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://github.com/TeslaFly01/SmartSqlT">SmartSQL 客户端&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="pgadmin">
+ &lt;strong>pgAdmin&lt;/strong>
+ &lt;a class="anchor" href="#pgadmin">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.pgadmin.org/">pgadmin 客户端&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="datagrip">
+ &lt;strong>DataGrip&lt;/strong>
+ &lt;a class="anchor" href="#datagrip">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.jetbrains.com/datagrip/">DataGrip 客户端&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="hhdbcs">
+ &lt;strong>HHDBCS&lt;/strong>
+ &lt;a class="anchor" href="#hhdbcs">#&lt;/a>
+&lt;/h3>
+&lt;p>&amp;ndash; 
+ &lt;a href="https://www.deskui.com/">HHDBCS 恒辉通用数据库管理桌面软件&lt;/a>&lt;/p>
+&lt;h3 id="各自的特点比较">
+ &lt;strong>各自的特点比较&lt;/strong>
+ &lt;a class="anchor" href="#%e5%90%84%e8%87%aa%e7%9a%84%e7%89%b9%e7%82%b9%e6%af%94%e8%be%83">#&lt;/a>
+&lt;/h3>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">产品名称&lt;/th>
+ &lt;th style="text-align: center">版权&lt;/th>
+ &lt;th style="text-align: center">兼容性&lt;/th>
+ &lt;th style="text-align: center">是否支持开源版本&lt;/th>
+ &lt;th style="text-align: center">函数&lt;/th>
+ &lt;th style="text-align: center">分区表&lt;/th>
+ &lt;th style="text-align: center">流畅性&lt;/th>
+ &lt;th style="text-align: center">资源占用&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">DBeaver&lt;/td>
+ &lt;td style="text-align: center">商业/开源&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持良好&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">一般&lt;/td>
+ &lt;td style="text-align: center">较大&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">DataGrip&lt;/td>
+ &lt;td style="text-align: center">商业&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持良好&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">较好&lt;/td>
+ &lt;td style="text-align: center">较大&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">Navicat&lt;/td>
+ &lt;td style="text-align: center">商业&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持一般&lt;/td>
+ &lt;td style="text-align: center">不支持&lt;/td>
+ &lt;td style="text-align: center">很好&lt;/td>
+ &lt;td style="text-align: center">一般&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">HHDBCS&lt;/td>
+ &lt;td style="text-align: center">开源&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持良好&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">很好&lt;/td>
+ &lt;td style="text-align: center">一般&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item><item><title>编程语言连接数据库</title><link>http://localhost:1313/docs/chapter03/codeconnection/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/chapter03/codeconnection/</guid><description>&lt;h2 id="编程语言接入">
  编程语言接入
  &lt;a class="anchor" href="#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e6%8e%a5%e5%85%a5">#&lt;/a>
 &lt;/h2>
