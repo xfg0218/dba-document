@@ -1,0 +1,15 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-cn'
+title = 'DBA-Document'
+theme = 'hugo-book'
+
+[params]
+    BookTheme = 'light'
+    description = 'DBA-Document'
+    BookSection = 'docs'
+    BookCommitPath = 'commit'
+    BookSearch = true
+    BookComments = true
+    BookPortableLinks = true
+    BookServiceWorker = true
+    customCSS = ["_custom.scss"]

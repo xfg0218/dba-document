@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>第三章-数据库使用 on DBA-Document</title><link>http://localhost:1313/docs/chapter03/</link><description>Recent content in 第三章-数据库使用 on DBA-Document</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="http://localhost:1313/docs/chapter03/index.xml" rel="self" type="application/rss+xml"/><item><title>客户端连接数据库</title><link>http://localhost:1313/docs/chapter03/clientconnection/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/chapter03/clientconnection/</guid><description>&lt;h2 id="客户端接入">
+ 客户端接入
+ &lt;a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e6%8e%a5%e5%85%a5">#&lt;/a>
+&lt;/h2>
+&lt;h2 id="客户端驱动下载">
+ 客户端驱动下载
+ &lt;a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd">#&lt;/a>
+&lt;/h2>
+&lt;h2 id="常见链接工具使用">
+ 常见链接工具使用
+ &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e9%93%be%e6%8e%a5%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="dbeaver">
+ &lt;strong>DBeaver&lt;/strong>
+ &lt;a class="anchor" href="#dbeaver">#&lt;/a>
+&lt;/h3>
+&lt;h3 id="dbvisualizer">
+ &lt;strong>DbVisualizer&lt;/strong>
+ &lt;a class="anchor" href="#dbvisualizer">#&lt;/a>
+&lt;/h3>
+&lt;h3 id="navicat">
+ &lt;strong>Navicat&lt;/strong>
+ &lt;a class="anchor" href="#navicat">#&lt;/a>
+&lt;/h3></description></item><item><title>编程语言连接数据库</title><link>http://localhost:1313/docs/chapter03/codeconnection/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/chapter03/codeconnection/</guid><description>&lt;h2 id="编程语言接入">
+ 编程语言接入
+ &lt;a class="anchor" href="#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e6%8e%a5%e5%85%a5">#&lt;/a>
+&lt;/h2>
+&lt;h2 id="链接驱动下载">
+ 链接驱动下载
+ &lt;a class="anchor" href="#%e9%93%be%e6%8e%a5%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="java-链接">
+ &lt;strong>JAVA 链接&lt;/strong>
+ &lt;a class="anchor" href="#java-%e9%93%be%e6%8e%a5">#&lt;/a>
+&lt;/h3>
+&lt;h3 id="python-链接">
+ &lt;strong>Python 链接&lt;/strong>
+ &lt;a class="anchor" href="#python-%e9%93%be%e6%8e%a5">#&lt;/a>
+&lt;/h3></description></item></channel></rss>

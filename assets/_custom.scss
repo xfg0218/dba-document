@@ -1,0 +1,74 @@
+/* You can add custom styles here. */
+
+// @import "plugins/numbered";
+
+/* 所有层级菜单项的点击态 */
+.book-menu li a:active,
+.book-menu li.active > a {  /* 当前选中项 */
+  background-color: #f5f5f5 !important; /* 浅灰色 */
+  border-radius: 4px;       /* 可选：圆角效果 */
+}
+
+/* 单独控制不同层级（可选） */
+.book-menu > ul > li > a:active,          /* 一级菜单 */
+.book-menu > ul > li > ul > li > a:active, /* 二级菜单 */
+.book-menu > ul > li > ul > li > ul > li > a:active { /* 三级菜单 */
+  background-color: #f0f0f0 !important;
+}
+
+/* 悬停效果 */
+.book-menu li a:hover {
+  background-color: #f8f9fa !important;
+}
+
+/* 点击态（保持按下效果） */
+.book-menu li a:active {
+  background-color: #e9ecef !important;
+  transform: translateY(1px); /* 可选：按下微移效果 */
+}
+
+
+/* 分割线的设置 */
+.book-menu {
+  position: relative;
+  border-right: 2px solid #1e88e5 !important; /* 蓝色竖线 */
+  padding-right: 20px !important;  /* 导航栏右侧内边距 */
+  border-right: 1px solid #e0e0e0; /* 可选：添加分割线 */
+}
+.book-menu:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 300%;
+  width: 1px;
+  background-color: #e0e0e0; /* 线条颜色，可调整 */
+}
+
+/* 调整布局间距 */
+.book-page {
+  margin-left: 3px !important; /* 防止内容紧贴蓝线 */
+  padding-left: 60px !important;   /* 内容区域左侧内边距 */
+}
+
+
+/* 控制子菜单缩进 */
+/* 二级菜单 */
+.book-menu ul ul {  
+  padding-left: 1rem !important; /* 缩进 1rem（16px） */
+  font-size: 15px;
+  padding-top: 0.5rem;
+  padding-inline-start: 1%;
+}
+
+ /* 三级菜单 */
+.book-menu ul ul ul { 
+  padding-left: 1rem !important; /* 缩进 2rem（32px） */
+  font-size: 16px;
+}
+
+ /* 四级菜单 */
+.book-menu ul ul ul ul { 
+  padding-left: 1rem !important; /* 缩进 3rem（48px） */
+  font-size: 16px;
+}

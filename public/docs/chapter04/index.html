@@ -1,0 +1,44 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  关于文档
+  #
+
+Mainly sharing practical experience in the project, helping more people quickly obtain the necessary information, making the cluster more stable and efficient.
+
+  搭站工具
+  #
+
+
+
+  Hugo
+
+  hugo-book-repo
+
+  hugo-book
+
+
+  常用学习资料
+  #
+
+
+  PostgreSQL 系列
+  #
+
+
+
+  PostgreSQL 中文文档
+
+  PostgreSQL 官方文档
+
+  PostgreSQL Wiki
+"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="http://localhost:1313/docs/chapter04/"><meta property="og:site_name" content="DBA-Document"><meta property="og:title" content="第四章-数据联邦"><meta property="og:description" content="关于文档 # Mainly sharing practical experience in the project, helping more people quickly obtain the necessary information, making the cluster more stable and efficient.
+搭站工具 # Hugo hugo-book-repo hugo-book 常用学习资料 # PostgreSQL 系列 # PostgreSQL 中文文档 PostgreSQL 官方文档 PostgreSQL Wiki"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="website"><title>第四章-数据联邦 | DBA-Document</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=http://localhost:1313/docs/chapter04/><link rel=stylesheet href=/book.min.719078fbf7009a7317ea5a303a3bac42fc9a8056fa5ffb4d728efef825f7b07d.css integrity="sha256-cZB4+/cAmnMX6lowOjusQvyagFb6X/tNco7++CX3sH0=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.c7e23e2cc0a80014bb413e6bd120e3dc33b60ef9befaa7bf14f02e8b19bd4391.js integrity="sha256-x+I+LMCoABS7QT5r0SDj3DO2Dvm++qe/FPAuixm9Q5E=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script><link rel=alternate type=application/rss+xml href=http://localhost:1313/docs/chapter04/index.xml title=DBA-Document></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>DBA-Document</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/docs/chapter01/>第一章-关于作者</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter02/>第二章-关于文档</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter03/>第三章-数据库使用</a><ul><li><a href=/docs/chapter03/clientconnection/>客户端连接数据库</a></li><li><a href=/docs/chapter03/codeconnection/>编程语言连接数据库</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-2450edf733e4f09a5c7eca539872f058 class=toggle checked>
+<label for=section-2450edf733e4f09a5c7eca539872f058 class=flex><a href=/docs/chapter04/ class="flex-auto active">第四章-数据联邦</a></label><ul><li><a href=/docs/chapter04/etltool/>ETL 工具</a><ul></ul></li><li><a href=/docs/chapter04/managementtool/>管理工具</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter04/synctool/>数据同步工具</a><ul><li><a href=/docs/chapter04/synctool/mysqlsync/>Mysql 同步工具</a><ul></ul></li><li><a href=/docs/chapter04/synctool/oraclesync/>Oracle数据同步工具</a><ul></ul></li></ul></li></ul></li><li class=book-section-flat><input type=checkbox id=section-5fe2d70ca29aabcf88b77541b6671498 class=toggle>
+<label for=section-5fe2d70ca29aabcf88b77541b6671498 class=flex><a href=/docs/chapter05/ class=flex-auto>第五章-监控与维护</a></label><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-40202811459f774e4fbe2c7643c84885 class=toggle>
+<label for=section-40202811459f774e4fbe2c7643c84885 class=flex><a href=/docs/chapter06/ class=flex-auto>第六章-故障诊断</a></label><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-b68aac4dc144759ec7a2d58bee1cc7da class=toggle>
+<label for=section-b68aac4dc144759ec7a2d58bee1cc7da class=flex><a href=/docs/chapter07/ class=flex-auto>第七章-数据库生态</a></label><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-cb9a7c6f5c48af57f6f4f92454e7f276 class=toggle>
+<label for=section-cb9a7c6f5c48af57f6f4f92454e7f276 class=flex><a href=/docs/chapter08/ class=flex-auto>第八章-性能优化</a></label><ul><li><a href=/docs/chapter08/linuxoptimize/>Linux 优化</a><ul></ul></li><li><a href=/docs/chapter08/sqloptimize/>SQL 优化</a><ul></ul></li></ul></li><li class=book-section-flat><a href=/docs/chapter09/>第九章-分析工具</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter10/>第十章-服务流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter11/>第十一章-交付流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter12/>第十二章-售后服务流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter13/>第十三章-常见问题FAQ</a><ul></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>第四章-数据联邦</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#关于文档>关于文档</a></li><li><a href=#搭站工具>搭站工具</a></li><li><a href=#常用学习资料>常用学习资料</a><ul><li><a href=#postgresql-系列>PostgreSQL 系列</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=关于文档>关于文档
+<a class=anchor href=#%e5%85%b3%e4%ba%8e%e6%96%87%e6%a1%a3>#</a></h2><p>Mainly sharing practical experience in the project, helping more people quickly obtain the necessary information, making the cluster more stable and efficient.</p><h2 id=搭站工具>搭站工具
+<a class=anchor href=#%e6%90%ad%e7%ab%99%e5%b7%a5%e5%85%b7>#</a></h2><ul><li><a href=https://gohugo.io/>Hugo</a></li><li><a href=https://github.com/alex-shpak/hugo-book>hugo-book-repo</a></li><li><a href=https://hugo-book-demo.netlify.app/docs/example/>hugo-book</a></li></ul><h2 id=常用学习资料>常用学习资料
+<a class=anchor href=#%e5%b8%b8%e7%94%a8%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99>#</a></h2><h3 id=postgresql-系列>PostgreSQL 系列
+<a class=anchor href=#postgresql-%e7%b3%bb%e5%88%97>#</a></h3><ul><li><a href=https://postgres.cn/docs/>PostgreSQL 中文文档</a></li><li><a href=https://www.postgresql.org/docs/>PostgreSQL 官方文档</a></li><li><a href=https://wiki.postgresql.org/wiki/Main_Page>PostgreSQL Wiki</a></li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#关于文档>关于文档</a></li><li><a href=#搭站工具>搭站工具</a></li><li><a href=#常用学习资料>常用学习资料</a><ul><li><a href=#postgresql-系列>PostgreSQL 系列</a></li></ul></li></ul></nav></div></aside></main></body></html>
