@@ -1,27 +1,432 @@
 <!doctype html><html lang=zh-cn dir=ltr><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
-  编程语言接入
+  编程语言连接数据库
+  #
+
+目前数据库一般支持HA的连接，即一个Coordinator内的一个节点异常后会链接到另外的一个节点，不会影响业务的正常运行。在JDBC配置时需要采用 
+  高可用链接字符串(Connection URL/DSN) 的方式连接。适用于不同的编程语言中使用，URL例如:
+postgres://username1:password1@CoordinatorIP:CoordinatorPort,CoordinatorIP:CoordinatorPort/database?sslmode=disable
+username1: Coordinator1数据库用户名
+password1: Coordinator1数据库密码
+CoordinatorIP: Coordinator1数据库IP
+CoordinatorPort: Coordinator1数据库端口
+database: 数据库名
+sslmode: 表示是否启用 SSL 连接。
+
+  URL 高级连接参数
   #
 
 
-  链接驱动下载
+  插入数据时的参数
   #
 
-
-  JAVA 链接
-  #
-
-
-  Python 链接
-  #
-"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="http://localhost:1313/docs/chapter03/codeconnection/"><meta property="og:site_name" content="DBA-Document"><meta property="og:title" content="编程语言连接数据库"><meta property="og:description" content="编程语言接入 # 链接驱动下载 # JAVA 链接 # Python 链接 #"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>编程语言连接数据库 | DBA-Document</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=http://localhost:1313/docs/chapter03/codeconnection/><link rel=stylesheet href=/book.min.719078fbf7009a7317ea5a303a3bac42fc9a8056fa5ffb4d728efef825f7b07d.css integrity="sha256-cZB4+/cAmnMX6lowOjusQvyagFb6X/tNco7++CX3sH0=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.2122bada67f141c51c63ebff8264e8beee2db37eaa7f2f41522e3a51ff06eef6.js integrity="sha256-ISK62mfxQcUcY+v/gmTovu4ts36qfy9BUi46Uf8G7vY=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+如果在批量加载数据时需要添加以下的参数，为了在加载数据时按照batchSize进行批量写入，可以添加以下参数：
+preferQueryMode=simple&amp;reWriteBatchedInserts=true
+preferQueryMode: 指定使用哪种模式来执行对数据库的查询：simple 表示（Q执行，不解析，不绑定，仅文本模式），extended 表示始终使用绑定 / 执行消息，extendedForPrepared 表示仅对预编译语句使用 extended 模式，endedCacheEverything 表示使用扩展协议并尝试在查询缓存中缓存每一条语句（包括 Statement.execute (String sql)）。取值为 extended | extendedForPrepared | extendedCacheEverything | simple 。
+reWriteBatchedInserts: 这会将批量插入语句从 insert into foo (col1, col2, col3) values (1, 2, 3) 改为 insert into foo (col1, col2, col3) values (1, 2, 3), (4, 5, 6)，这样能提升 2 - 3 倍的性能。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="http://localhost:1313/docs/chapter03/codeconnection/"><meta property="og:site_name" content="DBA-Document"><meta property="og:title" content="编程语言连接数据库"><meta property="og:description" content="编程语言连接数据库 # 目前数据库一般支持HA的连接，即一个Coordinator内的一个节点异常后会链接到另外的一个节点，不会影响业务的正常运行。在JDBC配置时需要采用 高可用链接字符串(Connection URL/DSN) 的方式连接。适用于不同的编程语言中使用，URL例如:
+postgres://username1:password1@CoordinatorIP:CoordinatorPort,CoordinatorIP:CoordinatorPort/database?sslmode=disable username1: Coordinator1数据库用户名
+password1: Coordinator1数据库密码
+CoordinatorIP: Coordinator1数据库IP
+CoordinatorPort: Coordinator1数据库端口
+database: 数据库名
+sslmode: 表示是否启用 SSL 连接。
+URL 高级连接参数 # 插入数据时的参数 # 如果在批量加载数据时需要添加以下的参数，为了在加载数据时按照batchSize进行批量写入，可以添加以下参数：
+preferQueryMode=simple&amp;reWriteBatchedInserts=true preferQueryMode: 指定使用哪种模式来执行对数据库的查询：simple 表示（Q执行，不解析，不绑定，仅文本模式），extended 表示始终使用绑定 / 执行消息，extendedForPrepared 表示仅对预编译语句使用 extended 模式，endedCacheEverything 表示使用扩展协议并尝试在查询缓存中缓存每一条语句（包括 Statement.execute (String sql)）。取值为 extended | extendedForPrepared | extendedCacheEverything | simple 。
+reWriteBatchedInserts: 这会将批量插入语句从 insert into foo (col1, col2, col3) values (1, 2, 3) 改为 insert into foo (col1, col2, col3) values (1, 2, 3), (4, 5, 6)，这样能提升 2 - 3 倍的性能。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>编程语言连接数据库 | DBA-Document</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=http://localhost:1313/docs/chapter03/codeconnection/><link rel=stylesheet href=/book.min.719078fbf7009a7317ea5a303a3bac42fc9a8056fa5ffb4d728efef825f7b07d.css integrity="sha256-cZB4+/cAmnMX6lowOjusQvyagFb6X/tNco7++CX3sH0=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.b9f280cadae8be749a3f90d3777a9582e85fa58d295e30e7b293752508c0ef9e.js integrity="sha256-ufKAytrovnSaP5DTd3qVguhfpY0pXjDnspN1JQjA754=" crossorigin=anonymous></script><script defer src=/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js integrity="sha256-b2+Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC+NdcPIvZhzk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>DBA-Document</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><a href=/docs/chapter01/>第一章-关于作者</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter02/>第二章-关于文档</a><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-623a513dca804afe1434990093524208 class=toggle checked>
 <label for=section-623a513dca804afe1434990093524208 class=flex><a href=/docs/chapter03/ class=flex-auto>第三章-数据库使用</a></label><ul><li><a href=/docs/chapter03/clientconnection/>客户端连接数据库</a></li><li><a href=/docs/chapter03/codeconnection/ class=active>编程语言连接数据库</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-d65b6a7f1d5f154921ce5aa7abc59494 class=toggle>
 <label for=section-d65b6a7f1d5f154921ce5aa7abc59494 class=flex><a href=/docs/chapter04/ class=flex-auto>第四章-数据联邦</a></label><ul><li><a href=/docs/chapter04/etltool/>ETL 工具</a><ul></ul></li><li><a href=/docs/chapter04/managementtool/>管理工具</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter04/synctool/>数据同步工具</a><ul><li><a href=/docs/chapter04/synctool/mysqlsync/>Mysql 同步工具</a><ul></ul></li><li><a href=/docs/chapter04/synctool/oraclesync/>Oracle数据同步工具</a><ul></ul></li></ul></li></ul></li><li class=book-section-flat><input type=checkbox id=section-b1eb4c24401e45ca9a799827fc92eef2 class=toggle>
 <label for=section-b1eb4c24401e45ca9a799827fc92eef2 class=flex><a href=/docs/chapter05/ class=flex-auto>第五章-监控与维护</a></label><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-db7ef70310e82c7af7c4e91e751960c7 class=toggle>
 <label for=section-db7ef70310e82c7af7c4e91e751960c7 class=flex><a href=/docs/chapter06/ class=flex-auto>第六章-故障诊断</a></label><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-93a5d7f73650a121b68c4a3f7a3ff684 class=toggle>
 <label for=section-93a5d7f73650a121b68c4a3f7a3ff684 class=flex><a href=/docs/chapter07/ class=flex-auto>第七章-数据库生态</a></label><ul></ul></li><li class=book-section-flat><input type=checkbox id=section-b6b6af527a53dd926743232a50ed364b class=toggle>
-<label for=section-b6b6af527a53dd926743232a50ed364b class=flex><a href=/docs/chapter08/ class=flex-auto>第八章-性能优化</a></label><ul><li><a href=/docs/chapter08/linuxoptimize/>Linux 优化</a><ul></ul></li><li><a href=/docs/chapter08/sqloptimize/>SQL 优化</a><ul></ul></li></ul></li><li class=book-section-flat><a href=/docs/chapter09/>第九章-分析工具</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter10/>第十章-服务流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter11/>第十一章-交付流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter12/>第十二章-售后服务流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter13/>第十三章-常见问题FAQ</a><ul></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>编程语言连接数据库</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#编程语言接入>编程语言接入</a></li><li><a href=#链接驱动下载>链接驱动下载</a><ul><li><a href=#java-链接><strong>JAVA 链接</strong></a></li><li><a href=#python-链接><strong>Python 链接</strong></a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=编程语言接入>编程语言接入
-<a class=anchor href=#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e6%8e%a5%e5%85%a5>#</a></h2><h2 id=链接驱动下载>链接驱动下载
-<a class=anchor href=#%e9%93%be%e6%8e%a5%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd>#</a></h2><h3 id=java-链接><strong>JAVA 链接</strong>
-<a class=anchor href=#java-%e9%93%be%e6%8e%a5>#</a></h3><h3 id=python-链接><strong>Python 链接</strong>
-<a class=anchor href=#python-%e9%93%be%e6%8e%a5>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#编程语言接入>编程语言接入</a></li><li><a href=#链接驱动下载>链接驱动下载</a><ul><li><a href=#java-链接><strong>JAVA 链接</strong></a></li><li><a href=#python-链接><strong>Python 链接</strong></a></li></ul></li></ul></nav></div></aside></main></body></html>
+<label for=section-b6b6af527a53dd926743232a50ed364b class=flex><a href=/docs/chapter08/ class=flex-auto>第八章-性能优化</a></label><ul><li><a href=/docs/chapter08/linuxoptimize/>Linux 优化</a><ul></ul></li><li><a href=/docs/chapter08/sqloptimize/>SQL 优化</a><ul></ul></li></ul></li><li class=book-section-flat><a href=/docs/chapter09/>第九章-分析工具</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter10/>第十章-服务流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter11/>第十一章-交付流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter12/>第十二章-售后服务流程</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter13/>第十三章-常见问题FAQ</a><ul></ul></li><li class=book-section-flat><a href=/docs/chapter14/>第十四章-DB差异对比</a><ul></ul></li><li class=book-section-flat><a href=/docs/example/>Example Site</a><ul></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>编程语言连接数据库</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#编程语言连接数据库>编程语言连接数据库</a></li><li><a href=#url-高级连接参数>URL 高级连接参数</a><ul><li><a href=#插入数据时的参数>插入数据时的参数</a></li><li><a href=#在高并发读取时的参数>在高并发读取时的参数</a></li></ul></li><li><a href=#java-链接案例><strong><code>JAVA 链接案例</code></strong></a><ul><li><a href=#驱动下载>驱动下载</a></li><li><a href=#连接案例>连接案例</a></li></ul></li><li><a href=#python-链接案例><strong><code>Python 链接案例</code></strong></a><ul><li><a href=#驱动下载-1>驱动下载</a></li><li><a href=#链接案例>链接案例</a></li></ul></li><li><a href=#go-链接案例><strong>Go 链接案例</strong></a><ul><li><a href=#驱动下载-2>驱动下载</a></li><li><a href=#链接案例-1>链接案例</a></li></ul></li><li><a href=#c-链接案例><strong>C 链接案例</strong></a><ul><li><a href=#驱动下载-3>驱动下载</a></li><li><a href=#配置驱动>配置驱动</a></li><li><a href=#c-链接代码>C 链接代码</a></li></ul></li><li><a href=#c-连接案例><strong><code>C# 连接案例</code></strong></a><ul><li><a href=#驱动下载-4>驱动下载</a></li><li><a href=#链接案例-2>链接案例</a></li><li><a href=#运行项目>运行项目</a></li></ul></li><li><a href=#ruby-连接案例><strong><code>Ruby 连接案例</code></strong></a><ul><li><a href=#驱动下载-5>驱动下载</a></li><li><a href=#链接案例-3>链接案例</a></li></ul></li><li><a href=#rust-连接案例><strong><code>Rust 连接案例</code></strong></a><ul><li><a href=#驱动下载-6>驱动下载</a></li><li><a href=#链接案例-4>链接案例</a></li></ul></li><li><a href=#nodejs-连接案例><strong><code>NodeJS 连接案例</code></strong></a><ul><li><a href=#驱动下载-7>驱动下载</a></li><li><a href=#链接案例-5>链接案例</a></li></ul></li><li><a href=#php-连接案例><strong><code>PHP 连接案例</code></strong></a><ul><li><a href=#驱动下载-8>驱动下载</a></li><li><a href=#链接案例-6>链接案例</a></li></ul></li><li><a href=#perl-连接案例><strong><code>Perl 连接案例</code></strong></a><ul><li><a href=#驱动下载-9>驱动下载</a></li><li><a href=#链接案例-7>链接案例</a></li></ul></li><li><a href=#excel-链接数据库>Excel 链接数据库</a><ul><li><a href=#驱动下载-10>驱动下载</a></li><li><a href=#链接案例-8>链接案例</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=编程语言连接数据库>编程语言连接数据库
+<a class=anchor href=#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e8%bf%9e%e6%8e%a5%e6%95%b0%e6%8d%ae%e5%ba%93>#</a></h2><p>目前数据库一般支持HA的连接，即一个<code>Coordinator</code>内的一个节点异常后会链接到另外的一个节点，不会影响业务的正常运行。在<code>JDBC</code>配置时需要采用
+<a href=https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNSTRING>高可用链接字符串(Connection URL/DSN)</a> 的方式连接。适用于不同的编程语言中使用，<code>URL</code>例如:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-SQL data-lang=SQL><span style=display:flex><span>postgres:<span style=color:#f92672>//</span>username1:password1<span style=color:#f92672>@</span>CoordinatorIP:CoordinatorPort,CoordinatorIP:CoordinatorPort<span style=color:#f92672>/</span><span style=color:#66d9ef>database</span><span style=color:#f92672>?</span>sslmode<span style=color:#f92672>=</span>disable
+</span></span></code></pre></div><p><code>username1</code>: Coordinator1数据库用户名</p><p><code>password1</code>: Coordinator1数据库密码</p><p><code>CoordinatorIP</code>: Coordinator1数据库IP</p><p><code>CoordinatorPort</code>: Coordinator1数据库端口</p><p><code>database</code>: 数据库名</p><p><code>sslmode</code>: 表示是否启用 SSL 连接。</p><h2 id=url-高级连接参数>URL 高级连接参数
+<a class=anchor href=#url-%e9%ab%98%e7%ba%a7%e8%bf%9e%e6%8e%a5%e5%8f%82%e6%95%b0>#</a></h2><h3 id=插入数据时的参数>插入数据时的参数
+<a class=anchor href=#%e6%8f%92%e5%85%a5%e6%95%b0%e6%8d%ae%e6%97%b6%e7%9a%84%e5%8f%82%e6%95%b0>#</a></h3><p>如果在批量加载数据时需要添加以下的参数，为了在加载数据时按照<code>batchSize</code>进行批量写入，可以添加以下参数：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>preferQueryMode<span style=color:#f92672>=</span><span style=color:#66d9ef>simple</span><span style=color:#f92672>&amp;</span>reWriteBatchedInserts<span style=color:#f92672>=</span><span style=color:#66d9ef>true</span>
+</span></span></code></pre></div><p><strong><code>preferQueryMode</code></strong>: 指定使用哪种模式来执行对数据库的查询：simple 表示（<code>Q</code>执行，不解析，不绑定，仅文本模式），<code>extended</code> 表示始终使用绑定 / 执行消息，<code>extendedForPrepared</code> 表示仅对预编译语句使用 <code>extended</code> 模式，<code>endedCacheEverything</code> 表示使用扩展协议并尝试在查询缓存中缓存每一条语句（包括 <code>Statement.execute (String sql)）</code>。取值为 <code>extended | extendedForPrepared | extendedCacheEverything | simple</code> 。</p><p><strong><code>reWriteBatchedInserts</code></strong>: 这会将批量插入语句从 <code>insert into foo (col1, col2, col3) values (1, 2, 3)</code> 改为 <code>insert into foo (col1, col2, col3) values (1, 2, 3), (4, 5, 6)</code>，这样能提升 2 - 3 倍的性能。</p><h3 id=在高并发读取时的参数>在高并发读取时的参数
+<a class=anchor href=#%e5%9c%a8%e9%ab%98%e5%b9%b6%e5%8f%91%e8%af%bb%e5%8f%96%e6%97%b6%e7%9a%84%e5%8f%82%e6%95%b0>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span>preparedStatementCacheQueries<span style=color:#f92672>=</span><span style=color:#ae81ff>512</span><span style=color:#f92672>&amp;</span>defaultRowFetchSize<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span><span style=color:#f92672>&amp;</span>prepareThreshold<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
+</span></span></code></pre></div><p><strong><code>preparedStatementCacheQueries</code></strong>：一个会话中最大能缓存的PreparedStatement数量，默认值256，在高并发读取时可以适当调整为512.</p><p><strong><code>defaultRowFetchSize</code></strong>：每次以游标的形式从数据库中获取的行数，默认值0不限制，可以适当调整为500，每次获取500行。</p><p><strong><code>prepareThreshold</code></strong>：确定在切换到使用服务器端预编译语句之前，PreparedStatement所需的执行次数。默认值为 5，这意味着在同一个PreparedStatement对象执行第 5 次时开始使用服务器端预编译语句。</p><blockquote><p><a href=https://jdbc.postgresql.org/documentation/head/connect.html>PostgreSQL JDBC 官方参数详解</a></p></blockquote><h2 id=java-链接案例><strong><code>JAVA 链接案例</code></strong>
+<a class=anchor href=#java-%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd>#</a></h3><p>建议选择使用与 PostgreSQL 与 Greenplum 兼容的驱动。</p><ul><li><p><a href=https://jdbc.postgresql.org/>PostgreSQL 官方驱动</a></p></li><li><p><a href=https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/datadirect-datadirect_jdbc.html#configuring-prepared-statement-execution>Greenplum 官方驱动</a></p></li><li><p><a href=https://jdbc.postgresql.org/documentation/server-prepare/>PostgreSQL® Extensions to the JDBC API</a></p></li></ul><h3 id=连接案例>连接案例
+<a class=anchor href=#%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h3><ul><li><a href=https://gitee.com/gaoky2020/ymatrix-labs/tree/master/04_example_javacase/LoadDataTOYMatrix>Java JDBC 操作代码示例</a></li></ul><h2 id=python-链接案例><strong><code>Python 链接案例</code></strong>
+<a class=anchor href=#python-%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-1>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-1>#</a></h3><ul><li><a href=https://pypi.org/project/psycopg2/>Python 官方驱动</a></li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 轻量版驱动</span>
+</span></span><span style=display:flex><span>pip install psycopg2<span style=color:#f92672>-</span>binary
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 本地编译</span>
+</span></span><span style=display:flex><span>pip install psycopg2
+</span></span></code></pre></div><h3 id=链接案例>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> psycopg2
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#  1. 连接数据库（替换为你的实际参数）</span>
+</span></span><span style=display:flex><span>conn <span style=color:#f92672>=</span> psycopg2<span style=color:#f92672>.</span>connect(
+</span></span><span style=display:flex><span>    host<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;localhost&#34;</span>,
+</span></span><span style=display:flex><span>    database<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;testdb&#34;</span>,
+</span></span><span style=display:flex><span>    user<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;postgres&#34;</span>,
+</span></span><span style=display:flex><span>    password<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;yourpassword&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 2. 创建游标</span>
+</span></span><span style=display:flex><span>cur <span style=color:#f92672>=</span> conn<span style=color:#f92672>.</span>cursor()
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 3. 创建表（如果不存在）</span>
+</span></span><span style=display:flex><span>cur<span style=color:#f92672>.</span>execute(<span style=color:#e6db74>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    CREATE TABLE IF NOT EXISTS users (
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        id SERIAL PRIMARY KEY,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        name VARCHAR(100),
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        email VARCHAR(100) UNIQUE
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    )
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 4. 插入一条数据</span>
+</span></span><span style=display:flex><span>cur<span style=color:#f92672>.</span>execute(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;INSERT INTO users (name, email) VALUES (</span><span style=color:#e6db74>%s</span><span style=color:#e6db74>, </span><span style=color:#e6db74>%s</span><span style=color:#e6db74>)&#34;</span>,
+</span></span><span style=display:flex><span>    (<span style=color:#e6db74>&#34;Alice&#34;</span>, <span style=color:#e6db74>&#34;alice@example.com&#34;</span>)
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 5. 查询数据</span>
+</span></span><span style=display:flex><span>cur<span style=color:#f92672>.</span>execute(<span style=color:#e6db74>&#34;SELECT * FROM users&#34;</span>)
+</span></span><span style=display:flex><span>rows <span style=color:#f92672>=</span> cur<span style=color:#f92672>.</span>fetchall()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> row <span style=color:#f92672>in</span> rows:
+</span></span><span style=display:flex><span>    print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;ID: </span><span style=color:#e6db74>{</span>row[<span style=color:#ae81ff>0</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>, Name: </span><span style=color:#e6db74>{</span>row[<span style=color:#ae81ff>1</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>, Email: </span><span style=color:#e6db74>{</span>row[<span style=color:#ae81ff>2</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 6. 关闭连接</span>
+</span></span><span style=display:flex><span>conn<span style=color:#f92672>.</span>commit()  <span style=color:#75715e># 提交事务</span>
+</span></span><span style=display:flex><span>cur<span style=color:#f92672>.</span>close()
+</span></span><span style=display:flex><span>conn<span style=color:#f92672>.</span>close()
+</span></span></code></pre></div><h2 id=go-链接案例><strong>Go 链接案例</strong>
+<a class=anchor href=#go-%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-2>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-2>#</a></h3><p><a href=https://github.com/jackc/pgx>pgx</a> 是一个用于 PostgreSQL 的纯 Go 语言驱动程序和工具包。</p><h3 id=链接案例-1>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-1>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> (
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;context&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;os&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#e6db74>&#34;github.com/jackc/pgx/v5&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>	<span style=color:#75715e>// urlExample := &#34;postgres://username:password@localhost:5432/database_name&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>conn</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>pgx</span>.<span style=color:#a6e22e>Connect</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>(), <span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Getenv</span>(<span style=color:#e6db74>&#34;DATABASE_URL&#34;</span>))
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stderr</span>, <span style=color:#e6db74>&#34;Unable to connect to database: %v\n&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Exit</span>(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>defer</span> <span style=color:#a6e22e>conn</span>.<span style=color:#a6e22e>Close</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>())
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>name</span> <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>weight</span> <span style=color:#66d9ef>int64</span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>err</span> = <span style=color:#a6e22e>conn</span>.<span style=color:#a6e22e>QueryRow</span>(<span style=color:#a6e22e>context</span>.<span style=color:#a6e22e>Background</span>(), <span style=color:#e6db74>&#34;select name, weight from widgets where id=$1&#34;</span>, <span style=color:#ae81ff>42</span>).<span style=color:#a6e22e>Scan</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>name</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>weight</span>)
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stderr</span>, <span style=color:#e6db74>&#34;QueryRow failed: %v\n&#34;</span>, <span style=color:#a6e22e>err</span>)
+</span></span><span style=display:flex><span>		<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Exit</span>(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>weight</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><blockquote><p>如果对与兼容性要求高，性能不是很高的场景可以使用
+<a href=https://pkg.go.dev/github.com/lib/pq>pg</a> 的连接驱动。</p></blockquote><h2 id=c-链接案例><strong>C 链接案例</strong>
+<a class=anchor href=#c-%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><p>建议使用
+<a href="https://odbc.postgresql.org/?spm=a2c4g.14484438.10004.13">psqlODBC</a> 的驱动连接 PostgreSQL 。下载并配置驱动的方式如下：</p><h3 id=驱动下载-3>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-3>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>sudo yum install -y unixODBC unixODBC-devel postgresql-odbc
+</span></span></code></pre></div><h3 id=配置驱动>配置驱动
+<a class=anchor href=#%e9%85%8d%e7%bd%ae%e9%a9%b1%e5%8a%a8>#</a></h3><p>在<code>etc/</code>下创建件<code>odbcinst.ini</code>和<code>odbc.ini</code>配置文件内容如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span><span style=color:#75715e># cat /etc/odbcinst.ini</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>PostgreSQL<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description <span style=color:#f92672>=</span> ODBC <span style=color:#66d9ef>for</span> PostgreSQL
+</span></span><span style=display:flex><span>Driver      <span style=color:#f92672>=</span> /usr/lib/psqlodbcw.so
+</span></span><span style=display:flex><span>Setup       <span style=color:#f92672>=</span> /usr/lib/libodbcpsqlS.so
+</span></span><span style=display:flex><span>Driver64    <span style=color:#f92672>=</span> /usr/lib64/psqlodbcw.so
+</span></span><span style=display:flex><span>Setup64     <span style=color:#f92672>=</span> /usr/lib64/libodbcpsqlS.so
+</span></span><span style=display:flex><span>FileUsage <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># cat /etc/odbc.ini</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>pg<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description <span style=color:#f92672>=</span> Test to pg
+</span></span><span style=display:flex><span>Driver <span style=color:#f92672>=</span> PostgreSQL
+</span></span><span style=display:flex><span>Database <span style=color:#f92672>=</span> test
+</span></span><span style=display:flex><span><span style=color:#75715e># Servername 集群的 Master,Standby的IP地址</span>
+</span></span><span style=display:flex><span>Servername <span style=color:#f92672>=</span> &lt;Master,Standby&gt;
+</span></span><span style=display:flex><span>UserName <span style=color:#f92672>=</span> username
+</span></span><span style=display:flex><span>Password <span style=color:#f92672>=</span> password
+</span></span><span style=display:flex><span><span style=color:#75715e># Master,Standby 的集群端口</span>
+</span></span><span style=display:flex><span>Port <span style=color:#f92672>=</span> &lt;Master Port,Standby Port&gt;
+</span></span><span style=display:flex><span>ReadOnly <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+</span></span></code></pre></div><h3 id=c-链接代码>C 链接代码
+<a class=anchor href=#c-%e9%93%be%e6%8e%a5%e4%bb%a3%e7%a0%81>#</a></h3><p>编写<code>odbc_test.c</code>代码，案例如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;sql.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;sqlext.h&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>check_error</span>(SQLRETURN ret, SQLHANDLE handle, SQLSMALLINT type) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span><span style=color:#a6e22e>SQL_SUCCEEDED</span>(ret)) {
+</span></span><span style=display:flex><span>        SQLCHAR sqlstate[<span style=color:#ae81ff>6</span>], message[<span style=color:#ae81ff>256</span>];
+</span></span><span style=display:flex><span>        SQLSMALLINT len;
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>SQLError</span>(handle, type, sqlstate, NULL, message, <span style=color:#66d9ef>sizeof</span>(message), <span style=color:#f92672>&amp;</span>len);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fprintf</span>(stderr, <span style=color:#e6db74>&#34;ERROR: %s (SQLSTATE %s)</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, message, sqlstate);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>exit</span>(<span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    SQLHENV env;
+</span></span><span style=display:flex><span>    SQLHDBC dbc;
+</span></span><span style=display:flex><span>    SQLHSTMT stmt;
+</span></span><span style=display:flex><span>    SQLRETURN ret;
+</span></span><span style=display:flex><span>    SQLCHAR connstr[] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;DSN=testdb&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 1. 初始化环境
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>SQLAllocHandle</span>(SQL_HANDLE_ENV, SQL_NULL_HANDLE, <span style=color:#f92672>&amp;</span>env);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SQLSetEnvAttr</span>(env, SQL_ATTR_ODBC_VERSION, (<span style=color:#66d9ef>void</span><span style=color:#f92672>*</span>)SQL_OV_ODBC3, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 2. 建立连接
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>SQLAllocHandle</span>(SQL_HANDLE_DBC, env, <span style=color:#f92672>&amp;</span>dbc);
+</span></span><span style=display:flex><span>    ret <span style=color:#f92672>=</span> <span style=color:#a6e22e>SQLDriverConnect</span>(dbc, NULL, connstr, SQL_NTS, NULL, <span style=color:#ae81ff>0</span>, NULL, SQL_DRIVER_COMPLETE);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>check_error</span>(ret, dbc, SQL_HANDLE_DBC);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 3. 创建表
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>SQLAllocHandle</span>(SQL_HANDLE_STMT, dbc, <span style=color:#f92672>&amp;</span>stmt);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SQLExecDirect</span>(stmt, <span style=color:#e6db74>&#34;CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, name VARCHAR(50))&#34;</span>, SQL_NTS);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Table created</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 4. 插入数据
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>SQLExecDirect</span>(stmt, <span style=color:#e6db74>&#34;INSERT INTO users(name) VALUES (&#39;CentOS User&#39;)&#34;</span>, SQL_NTS);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Data inserted</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 5. 查询数据
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>SQLExecDirect</span>(stmt, <span style=color:#e6db74>&#34;SELECT * FROM users&#34;</span>, SQL_NTS);
+</span></span><span style=display:flex><span>    SQLCHAR name[<span style=color:#ae81ff>50</span>];
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> (<span style=color:#a6e22e>SQLFetch</span>(stmt) <span style=color:#f92672>==</span> SQL_SUCCESS) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>SQLGetData</span>(stmt, <span style=color:#ae81ff>2</span>, SQL_C_CHAR, name, <span style=color:#66d9ef>sizeof</span>(name), NULL);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;User: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, name);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 6. 清理资源
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>SQLFreeHandle</span>(SQL_HANDLE_STMT, stmt);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SQLDisconnect</span>(dbc);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SQLFreeHandle</span>(SQL_HANDLE_DBC, dbc);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>SQLFreeHandle</span>(SQL_HANDLE_ENV, env);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=c-连接案例><strong><code>C# 连接案例</code></strong>
+<a class=anchor href=#c-%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-4>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-4>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c# data-lang=c#><span style=display:flex><span>sudo rpm -Uvh https:<span style=color:#75715e>//packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</span>
+</span></span><span style=display:flex><span>sudo yum install -y dotnet-sdk-<span style=color:#ae81ff>6.0</span>
+</span></span></code></pre></div><h3 id=链接案例-2>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-2>#</a></h3><p>创建项目并编写代码</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span>dotnet <span style=color:#66d9ef>new</span> console -n PgOdbcDemo
+</span></span><span style=display:flex><span>cd PgOdbcDemo
+</span></span></code></pre></div><p>编辑 Program.cs 文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span><span style=color:#66d9ef>using</span> System;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> System.Data.Odbc;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Program</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> Main()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 使用DSN或直接连接字符串</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>string</span> connStr = <span style=color:#e6db74>&#34;Dsn=testdb;&#34;</span>;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>using</span> (<span style=color:#66d9ef>var</span> conn = <span style=color:#66d9ef>new</span> OdbcConnection(connStr))
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>            conn.Open();
+</span></span><span style=display:flex><span>            Console.WriteLine(<span style=color:#e6db74>&#34;Connected to PostgreSQL via ODBC&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 查询版本</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>var</span> cmd = <span style=color:#66d9ef>new</span> OdbcCommand(<span style=color:#e6db74>&#34;SELECT version(), current_user&#34;</span>, conn);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>using</span> (<span style=color:#66d9ef>var</span> reader = cmd.ExecuteReader())
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>while</span> (reader.Read())
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                    Console.WriteLine(<span style=color:#e6db74>$&#34;Version: {reader[0]}&#34;</span>);
+</span></span><span style=display:flex><span>                    Console.WriteLine(<span style=color:#e6db74>$&#34;Current User: {reader[1]}&#34;</span>);
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=运行项目>运行项目
+<a class=anchor href=#%e8%bf%90%e8%a1%8c%e9%a1%b9%e7%9b%ae>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C# data-lang=C#><span style=display:flex><span>dotnet run
+</span></span></code></pre></div><h2 id=ruby-连接案例><strong><code>Ruby 连接案例</code></strong>
+<a class=anchor href=#ruby-%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-5>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-5>#</a></h3><p>推荐使用
+<a href=https://github.com/ged/ruby-pg>ruby-pg</a>作为<code>Ruby</code>的<code>PostgreSQL</code>驱动。</p><blockquote><p>要求Ruby 2.7 及以上版本。
+PostgreSQL 10 及以上版本。</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Ruby data-lang=Ruby><span style=display:flex><span>yum install <span style=color:#f92672>-</span>y gem
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>gem install pg <span style=color:#f92672>--</span> <span style=color:#f92672>--</span>with<span style=color:#f92672>-</span>pg<span style=color:#f92672>-</span>config<span style=color:#f92672>=&lt;</span>path to pg_config<span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>bundle config build<span style=color:#f92672>.</span>pg <span style=color:#f92672>--</span>with<span style=color:#f92672>-</span>pg<span style=color:#f92672>-</span>config<span style=color:#f92672>=&lt;</span>path to pg_config<span style=color:#f92672>&gt;</span>
+</span></span></code></pre></div><h3 id=链接案例-3>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-3>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Ruby data-lang=Ruby><span style=display:flex><span>  <span style=color:#75715e>#!/usr/bin/env ruby</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  require <span style=color:#e6db74>&#39;pg&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e># Output a table of current connections to the DB</span>
+</span></span><span style=display:flex><span>  conn <span style=color:#f92672>=</span> <span style=color:#66d9ef>PG</span><span style=color:#f92672>.</span>connect( <span style=color:#e6db74>dbname</span>: <span style=color:#e6db74>&#39;sales&#39;</span> )
+</span></span><span style=display:flex><span>  conn<span style=color:#f92672>.</span>exec( <span style=color:#e6db74>&#34;SELECT * FROM pg_stat_activity&#34;</span> ) <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>result<span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span>    puts <span style=color:#e6db74>&#34;     PID | User             | Query&#34;</span>
+</span></span><span style=display:flex><span>    result<span style=color:#f92672>.</span>each <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>row<span style=color:#f92672>|</span>
+</span></span><span style=display:flex><span>      puts <span style=color:#e6db74>&#34; %7d | %-16s | %s &#34;</span> <span style=color:#f92672>%</span>
+</span></span><span style=display:flex><span>        row<span style=color:#f92672>.</span>values_at(<span style=color:#e6db74>&#39;pid&#39;</span>, <span style=color:#e6db74>&#39;usename&#39;</span>, <span style=color:#e6db74>&#39;query&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>end</span>
+</span></span></code></pre></div><h2 id=rust-连接案例><strong><code>Rust 连接案例</code></strong>
+<a class=anchor href=#rust-%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-6>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-6>#</a></h3><p>推荐使用
+<a href=https://github.com/sfackler/rust-postgres>rust-postgres</a> 作为数据库的连接驱动。</p><h3 id=链接案例-4>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-4>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#66d9ef>use</span> tokio_postgres::{NoTls, Error};
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span><span style=color:#66d9ef>async</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() -&gt; Result<span style=color:#f92672>&lt;</span>(), Error<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> conn_str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;host=localhost user=your_username password=your_password dbname=your_dbname&#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> (client, connection) <span style=color:#f92672>=</span> tokio_postgres::connect(conn_str, NoTls).<span style=color:#66d9ef>await</span><span style=color:#f92672>?</span>;
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span> tokio::spawn(<span style=color:#66d9ef>async</span> <span style=color:#66d9ef>move</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Err(e) <span style=color:#f92672>=</span> connection.<span style=color:#66d9ef>await</span> {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>eprintln!</span>(<span style=color:#e6db74>&#34;连接池错误: </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span>, e);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span> <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;连接成功！&#34;</span>);
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> stmt <span style=color:#f92672>=</span> client.prepare(<span style=color:#e6db74>&#34;SELECT version();&#34;</span>).<span style=color:#66d9ef>await</span><span style=color:#f92672>?</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> rows <span style=color:#f92672>=</span> client.query(<span style=color:#f92672>&amp;</span>stmt, <span style=color:#f92672>&amp;</span>[]).<span style=color:#66d9ef>await</span><span style=color:#f92672>?</span>;
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> row <span style=color:#66d9ef>in</span> rows {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> version: String <span style=color:#f92672>=</span> row.get(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;PostgreSQL版本: </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span>, version);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    Ok(())
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=nodejs-连接案例><strong><code>NodeJS 连接案例</code></strong>
+<a class=anchor href=#nodejs-%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-7>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-7>#</a></h3><p>推荐使用
+<a href=https://github.com/porsager/postgres>postgres</a>作为链接驱动。</p><pre tabindex=0><code class=language-NodeJS data-lang=NodeJS>$ npm install postgres
+</code></pre><h3 id=链接案例-5>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-5>#</a></h3><p>推荐使用 Async/Await 的方法。</p><pre tabindex=0><code class=language-NodeJS data-lang=NodeJS>const { Client } = require(&#39;pg&#39;);
+
+async function main() {
+  const client = new Client({
+    host: &#39;localhost&#39;,
+    user: &#39;postgres&#39;,
+    password: &#39;yourpassword&#39;,
+    database: &#39;testdb&#39;,
+  });
+
+  try {
+    await client.connect();
+    
+    await client.query(&#39;BEGIN&#39;);
+    const insertRes = await client.query(
+      &#39;INSERT INTO users (name) VALUES ($1) RETURNING id&#39;,
+      [&#39;Bob&#39;]
+    );
+    await client.query(&#39;COMMIT&#39;);
+    
+    console.log(&#39;Inserted ID:&#39;, insertRes.rows[0].id);
+  } catch (err) {
+    await client.query(&#39;ROLLBACK&#39;);
+    console.error(&#39;Error:&#39;, err);
+  } finally {
+    await client.end();
+  }
+}
+
+main();
+</code></pre><h2 id=php-连接案例><strong><code>PHP 连接案例</code></strong>
+<a class=anchor href=#php-%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-8>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-8>#</a></h3><p>驱动建议安装7.4 及以上的版本。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#75715e># 安装驱动
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>sudo</span> <span style=color:#a6e22e>yum</span> <span style=color:#a6e22e>install</span> <span style=color:#a6e22e>php</span><span style=color:#f92672>-</span><span style=color:#a6e22e>pgsql</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 验证安装的驱动
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>php</span> <span style=color:#f92672>-</span><span style=color:#a6e22e>m</span> <span style=color:#f92672>|</span> <span style=color:#a6e22e>grep</span> <span style=color:#a6e22e>pgsql</span>
+</span></span></code></pre></div><h3 id=链接案例-6>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-6>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+</span></span><span style=display:flex><span>$host <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;localhost&#39;</span>;
+</span></span><span style=display:flex><span>$dbname <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;testdb&#39;</span>;
+</span></span><span style=display:flex><span>$user <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;postgres&#39;</span>;
+</span></span><span style=display:flex><span>$password <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;yourpassword&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>    $pdo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>PDO</span>(<span style=color:#e6db74>&#34;pgsql:host=</span><span style=color:#e6db74>$host</span><span style=color:#e6db74>;dbname=</span><span style=color:#e6db74>$dbname</span><span style=color:#e6db74>&#34;</span>, $user, $password, [
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>PDO</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ATTR_ERRMODE</span> <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>PDO</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ERRMODE_EXCEPTION</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>PDO</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ATTR_PERSISTENT</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>true</span>,  
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>PDO</span><span style=color:#f92672>::</span><span style=color:#a6e22e>ATTR_TIMEOUT</span> <span style=color:#f92672>=&gt;</span> <span style=color:#ae81ff>5</span>         
+</span></span><span style=display:flex><span>    ]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    $pdo<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>exec</span>(<span style=color:#e6db74>&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        CREATE TABLE IF NOT EXISTS users (
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            id SERIAL PRIMARY KEY,
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            name VARCHAR(100),
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>            email VARCHAR(100) UNIQUE
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>        )
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    &#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    $stmt <span style=color:#f92672>=</span> $pdo<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>prepare</span>(<span style=color:#e6db74>&#34;INSERT INTO users (name, email) VALUES (?, ?)&#34;</span>);
+</span></span><span style=display:flex><span>    $stmt<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>execute</span>([<span style=color:#e6db74>&#39;Alice&#39;</span>, <span style=color:#e6db74>&#39;alice@example.com&#39;</span>]);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Inserted ID: &#34;</span> <span style=color:#f92672>.</span> $pdo<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>lastInsertId</span>() <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    $stmt <span style=color:#f92672>=</span> $pdo<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>(<span style=color:#e6db74>&#34;SELECT * FROM users&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $stmt<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch</span>(<span style=color:#a6e22e>PDO</span><span style=color:#f92672>::</span><span style=color:#a6e22e>FETCH_ASSOC</span>)) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;ID: </span><span style=color:#e6db74>{</span>$row[<span style=color:#e6db74>&#39;id&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>, Name: </span><span style=color:#e6db74>{</span>$row[<span style=color:#e6db74>&#39;name&#39;</span>]<span style=color:#e6db74>}</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>} <span style=color:#66d9ef>catch</span> (<span style=color:#a6e22e>PDOException</span> $e) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>die</span>(<span style=color:#e6db74>&#34;Error: &#34;</span> <span style=color:#f92672>.</span> $e<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getMessage</span>());
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></div><h2 id=perl-连接案例><strong><code>Perl 连接案例</code></strong>
+<a class=anchor href=#perl-%e8%bf%9e%e6%8e%a5%e6%a1%88%e4%be%8b>#</a></h2><h3 id=驱动下载-9>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-9>#</a></h3><p>建议使用Perl5 的5.40.0 及更高版本</p><pre tabindex=0><code class=language-perf data-lang=perf># Debian/Ubuntu 安装方式
+sudo apt-get install libdbd-pg-perl
+
+# CentOS/RHEL 安装方式
+sudo yum install perl-DBD-Pg
+</code></pre><h3 id=链接案例-7>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-7>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-perl data-lang=perl><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/perl</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> strict;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> warnings;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> DBI;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $dsn <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;DBI:Pg:dbname=testdb;host=localhost;port=5432&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $user <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;postgres&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $password <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;yourpassword&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $dbh <span style=color:#f92672>=</span> DBI<span style=color:#f92672>-&gt;</span>connect($dsn, $user, $password, {
+</span></span><span style=display:flex><span>    RaiseError <span style=color:#f92672>=&gt;</span> <span style=color:#ae81ff>1</span>,       <span style=color:#75715e># 自动报错</span>
+</span></span><span style=display:flex><span>    AutoCommit <span style=color:#f92672>=&gt;</span> <span style=color:#ae81ff>0</span>,       <span style=color:#75715e># 关闭自动提交（启用事务）</span>
+</span></span><span style=display:flex><span>    pg_server_prepare <span style=color:#f92672>=&gt;</span> <span style=color:#ae81ff>1</span> <span style=color:#75715e># 启用服务器端预处理</span>
+</span></span><span style=display:flex><span>}) <span style=color:#f92672>or</span> die $DBI::errstr;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>$dbh<span style=color:#f92672>-&gt;</span><span style=color:#66d9ef>do</span>(<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#39;SQL&#39;</span>);
+</span></span><span style=display:flex><span>CREATE TABLE IF NOT EXISTS users (
+</span></span><span style=display:flex><span>    id SERIAL PRIMARY KEY,
+</span></span><span style=display:flex><span>    name VARCHAR(<span style=color:#ae81ff>100</span>),
+</span></span><span style=display:flex><span>    email VARCHAR(<span style=color:#ae81ff>100</span>) UNIQUE
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>SQL
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $insert <span style=color:#f92672>=</span> $dbh<span style=color:#f92672>-&gt;</span>prepare(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;INSERT INTO users (name, email) VALUES (?, ?) RETURNING id&#34;</span>
+</span></span><span style=display:flex><span>);
+</span></span><span style=display:flex><span>$insert<span style=color:#f92672>-&gt;</span>execute(<span style=color:#e6db74>&#39;Alice&#39;</span>, <span style=color:#e6db74>&#39;alice@example.com&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $new_id <span style=color:#f92672>=</span> $insert<span style=color:#f92672>-&gt;</span>fetchrow_arrayref<span style=color:#f92672>-&gt;</span>[<span style=color:#ae81ff>0</span>];
+</span></span><span style=display:flex><span><span style=color:#66d9ef>print</span> <span style=color:#e6db74>&#34;Inserted ID: $new_id\n&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>my</span> $sth <span style=color:#f92672>=</span> $dbh<span style=color:#f92672>-&gt;</span>prepare(<span style=color:#e6db74>&#34;SELECT * FROM users&#34;</span>);
+</span></span><span style=display:flex><span>$sth<span style=color:#f92672>-&gt;</span>execute();
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> (<span style=color:#66d9ef>my</span> $row <span style=color:#f92672>=</span> $sth<span style=color:#f92672>-&gt;</span>fetchrow_hashref) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>print</span> <span style=color:#e6db74>&#34;ID: $row-&gt;{id}, Name: $row-&gt;{name}\n&#34;</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>$dbh<span style=color:#f92672>-&gt;</span>commit;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>$sth<span style=color:#f92672>-&gt;</span>finish;
+</span></span><span style=display:flex><span>$dbh<span style=color:#f92672>-&gt;</span>disconnect;
+</span></span></code></pre></div><h2 id=excel-链接数据库>Excel 链接数据库
+<a class=anchor href=#excel-%e9%93%be%e6%8e%a5%e6%95%b0%e6%8d%ae%e5%ba%93>#</a></h2><h3 id=驱动下载-10>驱动下载
+<a class=anchor href=#%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd-10>#</a></h3><p>建议从
+<a href=https://www.postgresql.org/ftp/odbc/versions.old/msi/>psqlODBC 驱动安装包</a>下载ODBC 驱动。</p><h3 id=链接案例-8>链接案例
+<a class=anchor href=#%e9%93%be%e6%8e%a5%e6%a1%88%e4%be%8b-8>#</a></h3><p>链接案例请参考
+<a href=https://www.rockdata.net/zh-cn/tutorial/excel-odbc-connect/>使用 Excel 访问 PostgreSQL</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#编程语言连接数据库>编程语言连接数据库</a></li><li><a href=#url-高级连接参数>URL 高级连接参数</a><ul><li><a href=#插入数据时的参数>插入数据时的参数</a></li><li><a href=#在高并发读取时的参数>在高并发读取时的参数</a></li></ul></li><li><a href=#java-链接案例><strong><code>JAVA 链接案例</code></strong></a><ul><li><a href=#驱动下载>驱动下载</a></li><li><a href=#连接案例>连接案例</a></li></ul></li><li><a href=#python-链接案例><strong><code>Python 链接案例</code></strong></a><ul><li><a href=#驱动下载-1>驱动下载</a></li><li><a href=#链接案例>链接案例</a></li></ul></li><li><a href=#go-链接案例><strong>Go 链接案例</strong></a><ul><li><a href=#驱动下载-2>驱动下载</a></li><li><a href=#链接案例-1>链接案例</a></li></ul></li><li><a href=#c-链接案例><strong>C 链接案例</strong></a><ul><li><a href=#驱动下载-3>驱动下载</a></li><li><a href=#配置驱动>配置驱动</a></li><li><a href=#c-链接代码>C 链接代码</a></li></ul></li><li><a href=#c-连接案例><strong><code>C# 连接案例</code></strong></a><ul><li><a href=#驱动下载-4>驱动下载</a></li><li><a href=#链接案例-2>链接案例</a></li><li><a href=#运行项目>运行项目</a></li></ul></li><li><a href=#ruby-连接案例><strong><code>Ruby 连接案例</code></strong></a><ul><li><a href=#驱动下载-5>驱动下载</a></li><li><a href=#链接案例-3>链接案例</a></li></ul></li><li><a href=#rust-连接案例><strong><code>Rust 连接案例</code></strong></a><ul><li><a href=#驱动下载-6>驱动下载</a></li><li><a href=#链接案例-4>链接案例</a></li></ul></li><li><a href=#nodejs-连接案例><strong><code>NodeJS 连接案例</code></strong></a><ul><li><a href=#驱动下载-7>驱动下载</a></li><li><a href=#链接案例-5>链接案例</a></li></ul></li><li><a href=#php-连接案例><strong><code>PHP 连接案例</code></strong></a><ul><li><a href=#驱动下载-8>驱动下载</a></li><li><a href=#链接案例-6>链接案例</a></li></ul></li><li><a href=#perl-连接案例><strong><code>Perl 连接案例</code></strong></a><ul><li><a href=#驱动下载-9>驱动下载</a></li><li><a href=#链接案例-7>链接案例</a></li></ul></li><li><a href=#excel-链接数据库>Excel 链接数据库</a><ul><li><a href=#驱动下载-10>驱动下载</a></li><li><a href=#链接案例-8>链接案例</a></li></ul></li></ul></nav></div></aside></main></body></html>

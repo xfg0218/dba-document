@@ -6,23 +6,11 @@ bookToc: true
 bookFlatSection: true
 ---
 
-## 关于文档
+## 数据库生态
 
-Mainly sharing practical experience in the project, helping more people quickly obtain the necessary information, making the cluster more stable and efficient.
+###  dbsyncer 数据同步工具
 
-##  搭站工具
-- [Hugo](https://gohugo.io/)
-- [hugo-book-repo](https://github.com/alex-shpak/hugo-book)
-- [hugo-book](https://hugo-book-demo.netlify.app/docs/example/)
-
-## 常用学习资料
-
-###  PostgreSQL 系列
-- [PostgreSQL 中文文档](https://postgres.cn/docs/)
-- [PostgreSQL 官方文档](https://www.postgresql.org/docs/)
-- [PostgreSQL Wiki](https://wiki.postgresql.org/wiki/Main_Page)
-
-
+<u>[DBSyncer](https://github.com/86dbs/dbsyncer)</u>（简称dbs）是一款开源的数据同步中间件，提供MySQL、Oracle、SqlServer、PostgreSQL、Elasticsearch(ES)、Kafka、File、SQL等同步场景。支持上传插件自定义同步转换业务，提供监控全量和增量数据统计图、应用性能预警等。
 
 
 

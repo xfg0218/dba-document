@@ -6,6 +6,17 @@
  客户端驱动下载
  &lt;a class="anchor" href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd">#&lt;/a>
 &lt;/h2>
+&lt;p>建议选择与 PostgreSQL 与 Greenplum 兼容的驱动。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>
+ &lt;a href="https://jdbc.postgresql.org/">PostgreSQL 官方驱动&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>
+ &lt;a href="https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/7/greenplum-database/datadirect-datadirect_jdbc.html#configuring-prepared-statement-execution">Greenplum 官方驱动&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
 &lt;h2 id="常见链接工具使用">
  常见链接工具使用
  &lt;a class="anchor" href="#%e5%b8%b8%e8%a7%81%e9%93%be%e6%8e%a5%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8">#&lt;/a>
@@ -14,26 +25,155 @@
  &lt;strong>DBeaver&lt;/strong>
  &lt;a class="anchor" href="#dbeaver">#&lt;/a>
 &lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://dbeaver.io/docs/wiki/Home/">DBeaver 中文文档&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="dbvisualizer">
  &lt;strong>DbVisualizer&lt;/strong>
  &lt;a class="anchor" href="#dbvisualizer">#&lt;/a>
 &lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.dbvis.com/download/">DbVisualizer 客户端连接软件&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="navicat">
  &lt;strong>Navicat&lt;/strong>
  &lt;a class="anchor" href="#navicat">#&lt;/a>
-&lt;/h3></description></item><item><title>编程语言连接数据库</title><link>http://localhost:1313/docs/chapter03/codeconnection/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/chapter03/codeconnection/</guid><description>&lt;h2 id="编程语言接入">
- 编程语言接入
- &lt;a class="anchor" href="#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e6%8e%a5%e5%85%a5">#&lt;/a>
-&lt;/h2>
-&lt;h2 id="链接驱动下载">
- 链接驱动下载
- &lt;a class="anchor" href="#%e9%93%be%e6%8e%a5%e9%a9%b1%e5%8a%a8%e4%b8%8b%e8%bd%bd">#&lt;/a>
-&lt;/h2>
-&lt;h3 id="java-链接">
- &lt;strong>JAVA 链接&lt;/strong>
- &lt;a class="anchor" href="#java-%e9%93%be%e6%8e%a5">#&lt;/a>
 &lt;/h3>
-&lt;h3 id="python-链接">
- &lt;strong>Python 链接&lt;/strong>
- &lt;a class="anchor" href="#python-%e9%93%be%e6%8e%a5">#&lt;/a>
-&lt;/h3></description></item></channel></rss>
+&lt;ul>
+&lt;li>
+ &lt;a href="http://www.navicat.com.cn/download/navicat-for-postgresql">客户端管理工具navicat下载&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="tableplus">
+ &lt;strong>Tableplus&lt;/strong>
+ &lt;a class="anchor" href="#tableplus">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://docs.tableplus.com/">Tableplus&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="smartsql">
+ &lt;strong>SmartSQL&lt;/strong>
+ &lt;a class="anchor" href="#smartsql">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://github.com/TeslaFly01/SmartSqlT">SmartSQL 客户端&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="pgadmin">
+ &lt;strong>pgAdmin&lt;/strong>
+ &lt;a class="anchor" href="#pgadmin">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.pgadmin.org/">pgadmin 客户端&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="datagrip">
+ &lt;strong>DataGrip&lt;/strong>
+ &lt;a class="anchor" href="#datagrip">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.jetbrains.com/datagrip/">DataGrip 客户端&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="hhdbcs">
+ &lt;strong>HHDBCS&lt;/strong>
+ &lt;a class="anchor" href="#hhdbcs">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://www.deskui.com/">HHDBCS 恒辉通用数据库管理桌面软件&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="antares-sql">
+ &lt;strong>Antares SQL&lt;/strong>
+ &lt;a class="anchor" href="#antares-sql">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>
+ &lt;a href="https://antares-sql.app/downloads/">Antares SQL 数据库管理软件&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="各自的特点比较">
+ &lt;strong>各自的特点比较&lt;/strong>
+ &lt;a class="anchor" href="#%e5%90%84%e8%87%aa%e7%9a%84%e7%89%b9%e7%82%b9%e6%af%94%e8%be%83">#&lt;/a>
+&lt;/h3>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">产品名称&lt;/th>
+ &lt;th style="text-align: center">版权&lt;/th>
+ &lt;th style="text-align: center">兼容性&lt;/th>
+ &lt;th style="text-align: center">是否支持开源版本&lt;/th>
+ &lt;th style="text-align: center">函数&lt;/th>
+ &lt;th style="text-align: center">分区表&lt;/th>
+ &lt;th style="text-align: center">流畅性&lt;/th>
+ &lt;th style="text-align: center">资源占用&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">DBeaver&lt;/td>
+ &lt;td style="text-align: center">商业/开源&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持良好&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">一般&lt;/td>
+ &lt;td style="text-align: center">较大&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">DataGrip&lt;/td>
+ &lt;td style="text-align: center">商业&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持良好&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">较好&lt;/td>
+ &lt;td style="text-align: center">较大&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">Navicat&lt;/td>
+ &lt;td style="text-align: center">商业&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持一般&lt;/td>
+ &lt;td style="text-align: center">不支持&lt;/td>
+ &lt;td style="text-align: center">很好&lt;/td>
+ &lt;td style="text-align: center">一般&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">HHDBCS&lt;/td>
+ &lt;td style="text-align: center">开源&lt;/td>
+ &lt;td style="text-align: center">GPDB5/6&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">支持良好&lt;/td>
+ &lt;td style="text-align: center">支持&lt;/td>
+ &lt;td style="text-align: center">很好&lt;/td>
+ &lt;td style="text-align: center">一般&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item><item><title>编程语言连接数据库</title><link>http://localhost:1313/docs/chapter03/codeconnection/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/chapter03/codeconnection/</guid><description>&lt;h2 id="编程语言连接数据库">
+ 编程语言连接数据库
+ &lt;a class="anchor" href="#%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80%e8%bf%9e%e6%8e%a5%e6%95%b0%e6%8d%ae%e5%ba%93">#&lt;/a>
+&lt;/h2>
+&lt;p>目前数据库一般支持HA的连接，即一个&lt;code>Coordinator&lt;/code>内的一个节点异常后会链接到另外的一个节点，不会影响业务的正常运行。在&lt;code>JDBC&lt;/code>配置时需要采用 
+ &lt;a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNSTRING">高可用链接字符串(Connection URL/DSN)&lt;/a> 的方式连接。适用于不同的编程语言中使用，&lt;code>URL&lt;/code>例如:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-SQL" data-lang="SQL">&lt;span style="display:flex;">&lt;span>postgres:&lt;span style="color:#f92672">//&lt;/span>username1:password1&lt;span style="color:#f92672">@&lt;/span>CoordinatorIP:CoordinatorPort,CoordinatorIP:CoordinatorPort&lt;span style="color:#f92672">/&lt;/span>&lt;span style="color:#66d9ef">database&lt;/span>&lt;span style="color:#f92672">?&lt;/span>sslmode&lt;span style="color:#f92672">=&lt;/span>disable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>username1&lt;/code>: Coordinator1数据库用户名&lt;/p>
+&lt;p>&lt;code>password1&lt;/code>: Coordinator1数据库密码&lt;/p>
+&lt;p>&lt;code>CoordinatorIP&lt;/code>: Coordinator1数据库IP&lt;/p>
+&lt;p>&lt;code>CoordinatorPort&lt;/code>: Coordinator1数据库端口&lt;/p>
+&lt;p>&lt;code>database&lt;/code>: 数据库名&lt;/p>
+&lt;p>&lt;code>sslmode&lt;/code>: 表示是否启用 SSL 连接。&lt;/p>
+&lt;h2 id="url-高级连接参数">
+ URL 高级连接参数
+ &lt;a class="anchor" href="#url-%e9%ab%98%e7%ba%a7%e8%bf%9e%e6%8e%a5%e5%8f%82%e6%95%b0">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="插入数据时的参数">
+ 插入数据时的参数
+ &lt;a class="anchor" href="#%e6%8f%92%e5%85%a5%e6%95%b0%e6%8d%ae%e6%97%b6%e7%9a%84%e5%8f%82%e6%95%b0">#&lt;/a>
+&lt;/h3>
+&lt;p>如果在批量加载数据时需要添加以下的参数，为了在加载数据时按照&lt;code>batchSize&lt;/code>进行批量写入，可以添加以下参数：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>preferQueryMode&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">simple&lt;/span>&lt;span style="color:#f92672">&amp;amp;&lt;/span>reWriteBatchedInserts&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>&lt;code>preferQueryMode&lt;/code>&lt;/strong>: 指定使用哪种模式来执行对数据库的查询：simple 表示（&lt;code>Q&lt;/code>执行，不解析，不绑定，仅文本模式），&lt;code>extended&lt;/code> 表示始终使用绑定 / 执行消息，&lt;code>extendedForPrepared&lt;/code> 表示仅对预编译语句使用 &lt;code>extended&lt;/code> 模式，&lt;code>endedCacheEverything&lt;/code> 表示使用扩展协议并尝试在查询缓存中缓存每一条语句（包括 &lt;code>Statement.execute (String sql)）&lt;/code>。取值为 &lt;code>extended | extendedForPrepared | extendedCacheEverything | simple&lt;/code> 。&lt;/p>
+&lt;p>&lt;strong>&lt;code>reWriteBatchedInserts&lt;/code>&lt;/strong>: 这会将批量插入语句从 &lt;code>insert into foo (col1, col2, col3) values (1, 2, 3)&lt;/code> 改为 &lt;code>insert into foo (col1, col2, col3) values (1, 2, 3), (4, 5, 6)&lt;/code>，这样能提升 2 - 3 倍的性能。&lt;/p></description></item></channel></rss>

@@ -11,7 +11,7 @@ bookCollapseSection: false
 
 ## 客户端驱动下载
 
-建议选择使用与与 PostgreSQL 与 Greenplum 兼容的驱动。
+建议选择与 PostgreSQL 与 Greenplum 兼容的驱动。
 
 - [PostgreSQL 官方驱动](https://jdbc.postgresql.org/)
 
@@ -50,7 +50,12 @@ bookCollapseSection: false
 
 ### **HHDBCS**
 
--- [HHDBCS 恒辉通用数据库管理桌面软件](https://www.deskui.com/)
+- [HHDBCS 恒辉通用数据库管理桌面软件](https://www.deskui.com/)
+
+### **Antares SQL**
+
+- [Antares SQL 数据库管理软件](https://antares-sql.app/downloads/)
+
 
 ### **各自的特点比较**
 
