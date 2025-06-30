@@ -40,6 +40,7 @@ preferQueryMode=simple&reWriteBatchedInserts=true
 
 **`reWriteBatchedInserts`**: 这会将批量插入语句从 `insert into foo (col1, col2, col3) values (1, 2, 3)` 改为 `insert into foo (col1, col2, col3) values (1, 2, 3), (4, 5, 6)`，这样能提升 2 - 3 倍的性能。
 
+
 ### 在高并发读取时的参数
 ```sql
 preparedStatementCacheQueries=512&defaultRowFetchSize=500&prepareThreshold=10
