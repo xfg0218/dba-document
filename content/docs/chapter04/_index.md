@@ -22,7 +22,17 @@ Mainly sharing practical experience in the project, helping more people quickly 
 - [PostgreSQL 官方文档](https://www.postgresql.org/docs/)
 - [PostgreSQL Wiki](https://wiki.postgresql.org/wiki/Main_Page)
 
+## 生态工具
+```
+DataEase 数据可视化
 
+https://dataease.io/docs/v2/
+
+
+https://sealos.run/app_store/mysql/teable/?bd_vid=11635445570634119805&s=%E9%A6%96%E9%A1%B5
+
+
+```
 
 
 

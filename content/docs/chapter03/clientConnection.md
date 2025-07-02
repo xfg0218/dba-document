@@ -56,6 +56,14 @@ bookCollapseSection: false
 
 - [Antares SQL 数据库管理软件](https://antares-sql.app/downloads/)
 
+### **WebDB**
+
+WebDB 支持 MySQL、MariaDB、PostgreSQL、TiDB、CockroachDB、MongoDB 等数据库。
+
+WebDB 也支持链接大模型，可以方便的生成需要的SQL。
+
+- [webdb](https://docs.webdb.app/)
+
 
 ### **各自的特点比较**
 
